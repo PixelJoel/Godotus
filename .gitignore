@@ -14,3 +14,10 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Ignore everything inside Minigames folder
+Minigames/*
+
+# But don't ignore the template files inside Minigames
+!Minigames/TemplateMinigame/
+!Minigames/TemplateMinigame/**

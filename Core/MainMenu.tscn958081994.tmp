@@ -1,0 +1,174 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5i2qecue7cxx"]
+
+[ext_resource type="Script" uid="uid://biejeplv0cy41" path="res://Core/Scripts/MainMenu.gd" id="1_iols2"]
+[ext_resource type="LabelSettings" uid="uid://r7jynd4c0yjk" path="res://Core/Art/MainMenu_HeaderSettings.tres" id="1_yuv5o"]
+[ext_resource type="Script" uid="uid://2v6c14y30f32" path="res://Core/Scripts/MainMenuTab.gd" id="2_axn0t"]
+[ext_resource type="Script" uid="uid://dgrpbwy4kspac" path="res://Core/Scripts/MainMenuButton.gd" id="4_lc1rc"]
+[ext_resource type="Script" uid="uid://co3tcw8sjrqj1" path="res://Core/Scripts/TextFileLoader.gd" id="5_cwao1"]
+[ext_resource type="Script" uid="uid://ov8msxig8p86" path="res://Core/Scripts/MinigameList.gd" id="5_dctjd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yuv5o"]
+font_size = 13
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yuv5o"]
+
+[sub_resource type="Theme" id="Theme_yuv5o"]
+
+[sub_resource type="FontFile" id="FontFile_dctjd"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_qg743"]
+font = SubResource("FontFile_dctjd")
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("button_play_game", "button_documentation", "button_minigames", "button_quit_game", "button_back", "menu_list")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iols2")
+button_play_game = NodePath("HBoxContainer/Tab_Main/VBoxContainer/StartButton")
+button_documentation = NodePath("HBoxContainer/Tab_Main/VBoxContainer/DocumentationButton")
+button_minigames = NodePath("HBoxContainer/Tab_Main/VBoxContainer/MinigameButton")
+button_quit_game = NodePath("HBoxContainer/Tab_Main/VBoxContainer/QuitButton")
+button_back = NodePath("Back_Button")
+menu_list = [NodePath("HBoxContainer/Tab_Main"), NodePath("HBoxContainer/Tab_Minigames"), NodePath("HBoxContainer/Tab_Documentation")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Tab_Main" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_axn0t")
+root = true
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+text = "GODOTUS"
+label_settings = ExtResource("1_yuv5o")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Main/Label"]
+layout_mode = 0
+offset_top = 37.0
+offset_right = 160.0
+offset_bottom = 60.0
+text = "The IGDA game 2026"
+label_settings = SubResource("LabelSettings_yuv5o")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+theme_override_constants/separation = 24
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yuv5o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MinigameButton")
+theme = SubResource("Theme_yuv5o")
+text = "Start Game"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="MinigameButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../DocumentationButton")
+text = "Minigames"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="DocumentationButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MinigameButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "Documentation"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yuv5o")
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DocumentationButton")
+text = "Quit Game"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="Tab_Minigames" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_axn0t")
+showBackButton = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Tab_Minigames"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MinigameList" type="VBoxContainer" parent="HBoxContainer/Tab_Minigames/ScrollContainer"]
+layout_mode = 2
+script = ExtResource("5_dctjd")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Minigames/ScrollContainer/MinigameList"]
+layout_mode = 2
+text = "Minigames"
+label_settings = SubResource("LabelSettings_qg743")
+
+[node name="Tab_Documentation" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_axn0t")
+showBackButton = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Tab_Documentation"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 90
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Tab_Documentation/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Documentation/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet"
+autowrap_mode = 3
+visible_characters_behavior = 1
+script = ExtResource("5_cwao1")
+textPath = "res://README.txt"
+
+[node name="Back_Button" type="Button" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -64.0
+offset_right = 158.0
+offset_bottom = -33.0
+grow_vertical = 0
+text = "<- Back"

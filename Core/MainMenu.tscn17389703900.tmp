@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5i2qecue7cxx"]
+
+[ext_resource type="Script" uid="uid://biejeplv0cy41" path="res://Core/Scripts/MainMenu.gd" id="1_iols2"]
+[ext_resource type="LabelSettings" uid="uid://r7jynd4c0yjk" path="res://Core/Art/MainMenu_HeaderSettings.tres" id="1_yuv5o"]
+[ext_resource type="Script" uid="uid://2v6c14y30f32" path="res://Core/Scripts/MainMenuTab.gd" id="2_axn0t"]
+[ext_resource type="Script" uid="uid://dgrpbwy4kspac" path="res://Core/Scripts/MainMenuButton.gd" id="4_lc1rc"]
+[ext_resource type="Script" uid="uid://co3tcw8sjrqj1" path="res://Core/Scripts/TextFileLoader.gd" id="5_cwao1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yuv5o"]
+font_size = 13
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yuv5o"]
+
+[sub_resource type="Theme" id="Theme_yuv5o"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("button_play_game", "button_documentation", "button_quit_game", "menu_list")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iols2")
+button_play_game = NodePath("HBoxContainer/Tab_Main/VBoxContainer/StartButton")
+button_documentation = NodePath("HBoxContainer/Tab_Main/VBoxContainer/DocumentationButton")
+button_quit_game = NodePath("HBoxContainer/Tab_Main/VBoxContainer/QuitButton")
+menu_list = [NodePath("HBoxContainer/Tab_Main"), NodePath("HBoxContainer/Tab_Minigames"), NodePath("HBoxContainer/Tab_Documentation")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Tab_Main" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_axn0t")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+text = "GODOTUS"
+label_settings = ExtResource("1_yuv5o")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Main/Label"]
+layout_mode = 0
+offset_top = 37.0
+offset_right = 160.0
+offset_bottom = 60.0
+text = "The IGDA game 2026"
+label_settings = SubResource("LabelSettings_yuv5o")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+theme_override_constants/separation = 24
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yuv5o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Tab_Main"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MinigameButton")
+theme = SubResource("Theme_yuv5o")
+text = "Start Game"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="MinigameButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../DocumentationButton")
+text = "Minigames"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="DocumentationButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MinigameButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "Documentation"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yuv5o")
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/Tab_Main/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../DocumentationButton")
+text = "Quit Game"
+script = ExtResource("4_lc1rc")
+metadata/_custom_type_script = "uid://dgrpbwy4kspac"
+
+[node name="Tab_Minigames" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_axn0t")
+
+[node name="Tab_Documentation" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_axn0t")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tab_Documentation"]
+layout_mode = 2
+script = ExtResource("5_cwao1")
+file_to_load = "res://README.txt"

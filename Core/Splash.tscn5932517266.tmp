@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://23syood6nvmw"]
+
+[ext_resource type="Theme" uid="uid://cemwsnypm4ubt" path="res://Core/Art/GodotusTheme.tres" id="1_85qmy"]
+[ext_resource type="Texture2D" uid="uid://ds5c1aaw6qgdw" path="res://Core/Art/icon_key_w.png" id="2_85qmy"]
+[ext_resource type="Script" uid="uid://b00iehl04320c" path="res://Core/Scripts/Splash_ButtonInstructions.gd" id="2_jgtpq"]
+[ext_resource type="Texture2D" uid="uid://c825xwt5pltcq" path="res://Core/Art/icon_key_a.png" id="4_3yv8h"]
+[ext_resource type="Texture2D" uid="uid://d1h5hntft1eyg" path="res://Core/Art/icon_key_s.png" id="5_s8nk1"]
+[ext_resource type="Texture2D" uid="uid://dqpoctsnvaah6" path="res://Core/Art/icon_key_d.png" id="6_muc36"]
+
+[sub_resource type="FontVariation" id="FontVariation_2mhsq"]
+variation_embolden = 1.0
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 31.000004
+offset_top = -101.0
+offset_right = 937.0
+offset_bottom = 12.0
+grow_vertical = 2
+rotation = -0.16929694
+theme = ExtResource("1_85qmy")
+theme_override_fonts/font = SubResource("FontVariation_2mhsq")
+theme_override_font_sizes/font_size = 82
+text = "SUPER MARIO GALAXY"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 51.0
+offset_top = -204.0
+offset_right = 418.0
+offset_bottom = -39.0
+grow_vertical = 0
+script = ExtResource("2_jgtpq")
+key_w_texture = ExtResource("2_85qmy")
+key_a_texture = ExtResource("4_3yv8h")
+key_s_texture = ExtResource("5_s8nk1")
+key_d_texture = ExtResource("6_muc36")
+
+[node name="HowToPlayLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_85qmy")
+theme_override_font_sizes/font_size = 32
+text = "How to play:"
